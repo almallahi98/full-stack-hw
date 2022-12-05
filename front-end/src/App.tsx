@@ -6,11 +6,15 @@ import {
 } from "@chakra-ui/react"
 import{Routes,Route}from 'react-router-dom'
 import Reg from "./component/auth/register/Reg"
+import Login from "./component/auth/login/Login"
+import Blog from "./component/home/Blog"
 
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Routes>
-      <Route path="/" element={<Reg/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/reg" element={<Reg/>}/>
+      <Route path="/blog" element={<Blog/>}/>
     </Routes>
   </ChakraProvider>
 )

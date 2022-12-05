@@ -8,6 +8,7 @@ import{Routes,Route}from 'react-router-dom'
 import Reg from "./component/auth/register/Reg"
 import Login from "./component/auth/login/Login"
 import Blog from "./component/home/Blog"
+import AddBlog from "./component/home/AddBlog"
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -15,6 +16,7 @@ export const App = () => (
       <Route path="/login" element={<Login/>}/>
       <Route path="/reg" element={<Reg/>}/>
       <Route path="/blog" element={<Blog/>}/>
+      <Route path="/AddBlog" element={<AddBlog/>}/>
     </Routes>
   </ChakraProvider>
 )

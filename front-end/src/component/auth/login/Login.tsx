@@ -1,7 +1,9 @@
 import { Center, SimpleGrid,Heading, FormControl, FormLabel, Input, Button, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+    const navigate=useNavigate();
     const [LoginData, setLoginData] = useState({username:'',password:''})
     const Login=()=>{
         fetch('http://localhost:5000/api/v1/auth/login',{
@@ -9,7 +11,14 @@ function Login() {
             mode:'cors',
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify(LoginData)
-    }).then((res)=>{if(res.status===201){localStorage.setItem("token",JSON.stringify(res.body))}})
+    }).then(res=>{
+        if(res.status==200){
+            localStorage.setItem("token",JSON.stringify(res.body))
+            
+            navigate('/blog');
+        }
+    })
+    // .then(data=>{console.log(localStorage.getItem("token"))})
     }
   return (
     <Center mt={'15vh'}>

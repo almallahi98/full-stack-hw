@@ -16,7 +16,7 @@ export const App = () => (
       <Route path="/login" element={<Login/>}/>
       <Route path="/reg" element={<Reg/>}/>
       <Route path="/blog" element={<Blog/>}/>
-      <Route path="/AddBlog" element={<AddBlog/>}/>
+      <Route path="/addblog" element={<AddBlog/>}/>
     </Routes>
   </ChakraProvider>
 )

@@ -7,22 +7,25 @@ import { deleteBlogSchema } from "../zod_schema/blog.schema";
 
 export const addNewBlog = async (req: Request, res: Response) => {
     try {
-        const blog = req.body as Blog;
-        const user = res.locals.user as IUser;
-        console.log(req.body);
-
-        await dbContext.blog.create({
-            data: {
-                massage: blog.massage,
-                tiltle: blog.tiltle,
-                user_id: user.user_id,
-            }
-        });
+        const data = req.body as Blog;
+        data.user_id=res.locals.user.user_id
+        //const user = res.locals.user as IUser;
+        //console.log(data);
+        if(!data){
+            return
+        }
+        await dbContext.blog.create({data:{
+            tiltle:"sss",
+            massage:"sss",
+            user:{connect:{user_id:data.user_id}}
+        }})
+   
+        
         return res.status(201).json({ msg: "new blog is added .." });
     }
     catch (err) {
         console.log(err);
-
+        return res.status(500).json({msg:err})
     }
 }
 
@@ -37,7 +40,7 @@ export const deleteBlog = async (req: Request, res: Response) => {
         }
     })
     if (deleteBlog.count == 0) {
-        return res.status(400).json('no blog fund with the given id')
+        return res.status(400).json({msg:'no blog fund with the given id'})
     }
     return res.status(200).json({ msg: "blog deleted" })
 }

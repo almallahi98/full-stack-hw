@@ -33,11 +33,7 @@ export const register = async (req: Request, res: Response) => {
         const newUser = req.body as User;
         newUser.password = await argon2.hash(newUser.password);
         await dbContext.user.create({
-            data: {
-                email: newUser.email,
-                password: newUser.password,
-                username: newUser.username
-            }
+            data: newUser
         });
         return res.status(201).json({ msg: 'you can login now' })
     }
